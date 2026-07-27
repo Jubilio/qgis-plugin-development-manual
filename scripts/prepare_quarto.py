@@ -45,11 +45,17 @@ def clean_lines(text: str) -> list[str]:
     return lines
 
 
+def chapter_relative_paths(line: str) -> str:
+    """Adjust project-root resources for generated files in ``chapters/``."""
+    return line.replace("](assets/", "](../assets/")
+
+
 def demote_headings(lines: list[str], first_heading: str) -> str:
     """Create one valid Quarto chapter with a single level-one heading."""
     output = [f"# {first_heading}", ""]
     skipped_first = False
-    for line in lines:
+    for raw_line in lines:
+        line = chapter_relative_paths(raw_line)
         if line == f"# {first_heading}" and not skipped_first:
             skipped_first = True
             continue
