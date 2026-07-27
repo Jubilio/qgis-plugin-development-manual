@@ -14,6 +14,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Normalise author name for validation
+        run: python scripts/normalize_author_name.py
+
       - name: Compile Python sources
         run: python -m compileall -q examples snippets scripts make_reference.py
 
