@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 - 2026-07-27
+
+- Transforma o manual num **Quarto Book** navegável.
+- Adiciona versão web com pesquisa, tema claro/escuro, navegação por capítulos e cópia de código.
+- Gera capítulos Quarto automaticamente a partir da fonte canónica `manual/manual.md`.
+- Adiciona publicação automática no GitHub Pages através da branch `gh-pages`.
+- Mantém PDF, Word, pacote-fonte e hashes nas releases do GitHub.
+- Adiciona página inicial, estilo visual próprio e ligações ao código, issues e releases.
+
 ## 1.0.0 - 2026-07-27
 
 - Publicação inicial do manual dedicado ao desenvolvimento de plugins QGIS com Python.
