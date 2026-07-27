@@ -33,6 +33,36 @@ jobs:
       - name: Normalise author name
         run: python scripts/normalize_author_name.py
 
+      - name: Commit normalised text through GitHub API
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_BRANCH: ${{ github.head_ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t changed_files < <(
+            git diff --name-only -- \
+              '*.md' '*.py' '*.sh' '*.yml' '*.yaml' '*.txt' '*.ini' \
+              LICENSE VERSION
+          )
+
+          for file in "${changed_files[@]}"; do
+            [ -n "$file" ] || continue
+            sha="$(gh api "repos/${GITHUB_REPOSITORY}/contents/${file}?ref=${TARGET_BRANCH}" --jq .sha)"
+            content="$(base64 -w 0 "$file")"
+            jq -n \
+              --arg message "Correct author name accents [skip ci]" \
+              --arg content "$content" \
+              --arg branch "$TARGET_BRANCH" \
+              --arg sha "$sha" \
+              '{message: $message, content: $content, branch: $branch, sha: $sha}' \
+              | gh api --method PUT \
+                  "repos/${GITHUB_REPOSITORY}/contents/${file}" \
+                  --input - >/dev/null
+            echo "Committed: $file"
+          done
+
       - name: Compile examples and scripts
         run: python -m compileall -q examples snippets scripts make_reference.py
 
@@ -76,13 +106,6 @@ jobs:
           name: qgis-plugin-development-manual
           path: release-assets/
           if-no-files-found: error
-
-      - name: Commit normalised source
-        if: github.event_name == 'pull_request'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Correct author name accents [skip ci]
-          branch: ${{ github.head_ref }}
 
       - name: Publish GitHub release
         if: github.event_name != 'pull_request'
