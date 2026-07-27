@@ -1,0 +1,129 @@
+name: Build and release manual
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install documentation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice graphviz fonts-dejavu-core poppler-utils zip
+          python -m pip install --upgrade pip python-docx
+
+      - name: Normalise author name
+        run: python scripts/normalize_author_name.py
+
+      - name: Compile examples and scripts
+        run: python -m compileall -q examples snippets scripts make_reference.py
+
+      - name: Build DOCX and PDF
+        run: bash build_manual.sh
+
+      - name: Validate generated documents
+        shell: bash
+        run: |
+          set -euo pipefail
+          PDF="manual/Desenvolvimento_de_Plugins_QGIS_com_Python.pdf"
+          DOCX="manual/Desenvolvimento_de_Plugins_QGIS_com_Python.docx"
+          test -s "$PDF"
+          test -s "$DOCX"
+          pdfinfo "$PDF" | grep -Eq '^Pages:[[:space:]]+[1-9][0-9]*$'
+          pdftotext "$PDF" - | grep -q 'Jubílio Filiano Maússe'
+          if pdftotext "$PDF" - | grep -q 'Jubílio Filiano Mausse'; then
+            echo "The generated PDF still contains the unaccented family name"
+            exit 1
+          fi
+
+      - name: Commit normalised source to main
+        if: github.event_name == 'push' && github.ref_name == 'main'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Correct author name accents [skip ci]
+          branch: main
+          file_pattern: >-
+            manual/manual.md
+            README.md
+            LICENSE
+            LICENSE-DOCS.md
+            build_manual.sh
+            make_reference.py
+
+      - name: Prepare release assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="$(tr -d '[:space:]' < VERSION)"
+          OUT="release-assets"
+          rm -rf "$OUT"
+          mkdir -p "$OUT"
+          cp manual/Desenvolvimento_de_Plugins_QGIS_com_Python.pdf "$OUT/"
+          cp manual/Desenvolvimento_de_Plugins_QGIS_com_Python.docx "$OUT/"
+          zip -qr "$OUT/qgis-plugin-development-manual-$VERSION-source.zip" . \
+            -x '.git/*' 'release-assets/*' 'manual/reference.docx' \
+               'manual/Desenvolvimento_de_Plugins_QGIS_com_Python.pdf' \
+               'manual/Desenvolvimento_de_Plugins_QGIS_com_Python.docx' \
+               '*/__pycache__/*' '*.pyc' '*.pyo'
+          (cd "$OUT" && sha256sum * > SHA256SUMS.txt)
+
+      - name: Upload validation artefact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: qgis-plugin-development-manual
+          path: release-assets/
+          if-no-files-found: error
+
+      - name: Publish GitHub release
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="$(tr -d '[:space:]' < VERSION)"
+          TAG="v$VERSION"
+          TITLE="Desenvolvimento de Plugins QGIS com Python - v$VERSION"
+          NOTES_FILE="release-notes.md"
+          cat > "$NOTES_FILE" <<EOF
+          # Desenvolvimento de Plugins QGIS com Python - v$VERSION
+
+          Manual em português, do básico ao avançado, por **Jubílio Filiano Maússe**.
+
+          Inclui estudos de caso do GPX Batch Converter e GeoClick Capture, exemplos funcionais, snippets, checklists, diagramas e um projecto prático.
+
+          ## Assets
+
+          - PDF final;
+          - versão editável em Word;
+          - pacote-fonte do repositório;
+          - hashes SHA-256.
+          EOF
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" release-assets/* --clobber
+          else
+            gh release create "$TAG" release-assets/* \
+              --target main \
+              --title "$TITLE" \
+              --notes-file "$NOTES_FILE"
+          fi

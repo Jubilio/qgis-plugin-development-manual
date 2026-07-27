@@ -1,22 +1,36 @@
 # Desenvolvimento de Plugins QGIS com Python
 
+[![Validar exemplos](https://github.com/Jubilio/qgis-plugin-development-manual/actions/workflows/plugin-checks.yml/badge.svg)](https://github.com/Jubilio/qgis-plugin-development-manual/actions/workflows/plugin-checks.yml)
+[![Construir manual](https://github.com/Jubilio/qgis-plugin-development-manual/actions/workflows/build-release.yml/badge.svg)](https://github.com/Jubilio/qgis-plugin-development-manual/actions/workflows/build-release.yml)
+
 Manual em português, do básico ao avançado, com estudos de caso de dois plugins reais:
 
 - [GPX Batch Converter](https://github.com/Jubilio/gpx-batch-converter)
 - [GeoClick Capture](https://github.com/Jubilio/qgis-latlon)
 
+**Autor:** Jubílio Filiano Maússe
+
+## Downloads
+
+A release mais recente disponibiliza:
+
+- manual em PDF;
+- versão editável em Word;
+- pacote-fonte do repositório;
+- hashes SHA-256 para verificação.
+
+[Descarregar a versão mais recente](https://github.com/Jubilio/qgis-plugin-development-manual/releases/latest)
+
 ## Conteúdo do repositório
 
-- `manual/Desenvolvimento_de_Plugins_QGIS_com_Python.pdf` - manual final em PDF;
-- `manual/Desenvolvimento_de_Plugins_QGIS_com_Python.docx` - versão editável;
-- `manual/manual.md` - fonte principal em Markdown;
+- `manual/manual.md` - fonte principal do manual em Markdown;
 - `examples/minimal_plugin` - estrutura mínima instalável de um plugin QGIS;
 - `examples/quick_point_logger` - projecto pedagógico com captura de pontos;
 - `snippets` - padrões reutilizáveis para Qt 5/6, tarefas, snapping e rede;
 - `checklists` - listas de controlo para desenvolvimento, bugs e publicação;
-- `assets/diagrams` - diagramas e fontes Graphviz;
-- `.github/workflows/plugin-checks.yml` - exemplo de integração contínua;
-- `CREATE_REPOSITORY.md` - passos para publicar este pacote num novo repositório GitHub.
+- `assets/diagrams` - diagramas e respectivas fontes Graphviz;
+- `.github/workflows/plugin-checks.yml` - validação de exemplos e estrutura;
+- `.github/workflows/build-release.yml` - construção e publicação reproduzível do manual.
 
 ## Temas abordados
 
@@ -43,36 +57,29 @@ python -m compileall -q examples snippets
 
 Para executar os plugins, copie a pasta do exemplo para o directório de plugins do perfil QGIS e reinicie ou recarregue o plugin.
 
-## Gerar o manual
+## Gerar o manual localmente
 
-Requisitos de documentação:
+Requisitos:
 
 - Python 3 com `python-docx`;
 - Pandoc;
 - LibreOffice;
-- Graphviz, apenas para regenerar os diagramas.
+- Graphviz.
 
-No Linux/macOS:
+No Linux ou macOS:
 
 ```bash
+python -m pip install python-docx
 bash build_manual.sh
 ```
 
-O processo cria o documento de referência, converte Markdown para DOCX e exporta o PDF com LibreOffice.
-
-## Publicação no GitHub
-
-Consulte [`CREATE_REPOSITORY.md`](CREATE_REPOSITORY.md). O nome recomendado é:
-
-```text
-qgis-plugin-development-manual
-```
+O processo gera os diagramas, cria o documento de referência, converte Markdown para DOCX e exporta o PDF com LibreOffice.
 
 ## Licenças
 
-- documentação: Creative Commons Attribution 4.0 International - consulte `LICENSE-DOCS.md`;
-- exemplos e código: MIT - consulte `LICENSE`.
+- documentação: Creative Commons Attribution 4.0 International - consulte [`LICENSE-DOCS.md`](LICENSE-DOCS.md);
+- exemplos e código: MIT - consulte [`LICENSE`](LICENSE).
 
 ## Autor
 
-**Jubílio Filiano Mausse**
+**Jubílio Filiano Maússe**

@@ -4,3 +4,7 @@ __pycache__/
 Thumbs.db
 manual/_renders/
 manual/_contact*/
+manual/reference.docx
+manual/Desenvolvimento_de_Plugins_QGIS_com_Python.docx
+manual/Desenvolvimento_de_Plugins_QGIS_com_Python.pdf
+release-assets/

@@ -3,6 +3,13 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MANUAL_DIR="$ROOT/manual"
+DIAGRAM_DIR="$ROOT/assets/diagrams"
+
+mkdir -p "$MANUAL_DIR"
+
+for source in "$DIAGRAM_DIR"/*.dot; do
+  dot -Tpng "$source" -o "${source%.dot}.png"
+done
 
 python "$ROOT/make_reference.py"
 
@@ -12,7 +19,7 @@ pandoc "$MANUAL_DIR/manual.md" \
   --lua-filter="$MANUAL_DIR/pagebreak.lua" \
   --resource-path="$ROOT" \
   --metadata title="Desenvolvimento de Plugins QGIS com Python" \
-  --metadata author="Jubílio Filiano Mausse"
+  --metadata author="Jubílio Filiano Maússe"
 
 libreoffice --headless --convert-to pdf \
   --outdir "$MANUAL_DIR" \

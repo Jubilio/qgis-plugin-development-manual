@@ -9,17 +9,42 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Normalise author name for validation
+        run: python scripts/normalize_author_name.py
+
       - name: Compile Python sources
-        run: python -m compileall -q examples snippets
+        run: python -m compileall -q examples snippets scripts make_reference.py
+
       - name: Validate required files
+        shell: bash
         run: |
+          set -euo pipefail
           test -f manual/manual.md
           test -f examples/minimal_plugin/metadata.txt
           test -f examples/quick_point_logger/metadata.txt
-          if find . -type d -name __pycache__ | grep -q .; then
-            echo "Python cache directories found"
+          test -f build_manual.sh
+          test -f VERSION
+          test -f LICENSE
+          test -f LICENSE-DOCS.md
+
+      - name: Validate repository hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-files | grep -E '(^|/)(__pycache__/|.*\.pyc$|.*\.pyo$)' >/dev/null; then
+            echo "Tracked Python cache files found"
             exit 1
           fi
+          if grep -R --exclude-dir=.git --exclude='*.pdf' --exclude='*.docx' \
+            'Jubílio Filiano Mausse' .; then
+            echo "Author name without the required accent was found"
+            exit 1
+          fi
+
+      - name: Check version format
+        run: grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' VERSION
