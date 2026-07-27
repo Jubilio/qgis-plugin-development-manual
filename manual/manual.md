@@ -1,7 +1,7 @@
 ---
 title: "Desenvolvimento de Plugins QGIS com Python"
 subtitle: "Do básico ao avançado, com GPX Batch Converter e GeoClick Capture"
-author: "Jubílio Filiano Mausse"
+author: "Jubílio Filiano Maússe"
 date: "24 de Julho de 2026"
 lang: pt-PT
 rights: "Documentação CC BY 4.0; exemplos de código MIT"
