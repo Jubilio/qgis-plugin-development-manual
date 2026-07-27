@@ -1,0 +1,61 @@
+project:
+  type: book
+  output-dir: _book
+  pre-render:
+    - python scripts/prepare_quarto.py
+
+lang: pt-PT
+
+book:
+  title: "Desenvolvimento de Plugins QGIS com Python"
+  subtitle: "Do básico ao avançado, com GPX Batch Converter e GeoClick Capture"
+  author:
+    - name: "Jubílio Filiano Maússe"
+  date: "24 de Julho de 2026"
+  site-url: "https://jubilio.github.io/qgis-plugin-development-manual/"
+  repo-url: "https://github.com/Jubilio/qgis-plugin-development-manual"
+  repo-actions: [edit, issue]
+  search: true
+  sharing: [linkedin, twitter]
+  page-footer:
+    left: "© 2026 Jubílio Filiano Maússe"
+    right: "Documentação sob CC BY 4.0"
+  chapters:
+    - index.qmd
+    - chapters/00-prefacio.qmd
+    - part: "Parte I — Fundamentos"
+      chapters:
+        - chapters/01-fundamentos.qmd
+    - part: "Parte II — O primeiro plugin"
+      chapters:
+        - chapters/02-primeiro-plugin.qmd
+    - part: "Parte III — Desenvolvimento intermédio"
+      chapters:
+        - chapters/03-desenvolvimento-intermedio.qmd
+    - part: "Parte IV — Desenvolvimento avançado"
+      chapters:
+        - chapters/04-desenvolvimento-avancado.qmd
+    - part: "Parte V — Estudos de caso"
+      chapters:
+        - chapters/05-estudos-de-caso.qmd
+    - part: "Parte VI — Projecto prático"
+      chapters:
+        - chapters/06-projecto-pratico.qmd
+  appendices:
+    - chapters/07-apendices.qmd
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    link-external-newwindow: true
+
+execute:
+  freeze: auto

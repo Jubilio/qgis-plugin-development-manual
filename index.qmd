@@ -1,0 +1,56 @@
+---
+title: "Desenvolvimento de Plugins QGIS com Python"
+subtitle: "Do básico ao avançado"
+author: "Jubílio Filiano Maússe"
+page-layout: full
+---
+
+::: {.hero}
+# Crie plugins QGIS robustos, testáveis e publicáveis
+
+Um manual prático em português para aprender **Python**, **PyQGIS**, interfaces Qt, tarefas em segundo plano, snapping, rede, testes, compatibilidade Qt 5/6 e publicação profissional.
+
+[Começar pelo prefácio](chapters/00-prefacio.qmd){.btn .btn-primary .btn-lg}
+[Ver o código no GitHub](https://github.com/Jubilio/qgis-plugin-development-manual){.btn .btn-outline-secondary .btn-lg}
+:::
+
+## O que encontrará neste livro
+
+::: {.grid}
+::: {.g-col-12 .g-col-md-4}
+### Do primeiro botão ao plugin completo
+
+Estrutura do pacote, `metadata.txt`, `classFactory()`, menus, barras de ferramentas, diálogos e painéis laterais.
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### GIS e automação reais
+
+Camadas, CRS, formatos, tarefas em segundo plano, ferramentas de mapa, snapping e serviços de rede.
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### Qualidade e publicação
+
+Compatibilidade QGIS 3/4 e Qt 5/6, segurança, testes, GitHub Actions, releases e submissão ao repositório oficial.
+:::
+:::
+
+## Estudos de caso
+
+O manual utiliza dois plugins desenvolvidos a partir de necessidades reais:
+
+- **[GPX Batch Converter](https://github.com/Jubilio/gpx-batch-converter)** — conversão em lote, `QgsTask`, cancelamento, GDAL/OGR, relatórios e segurança;
+- **[GeoClick Capture](https://github.com/Jubilio/qgis-latlon)** — ferramentas de mapa, snapping, transformação de coordenadas, sessões, geocodificação e painéis laterais.
+
+## Formatos disponíveis
+
+A versão web oferece pesquisa, navegação por capítulos, links directos para secções e cópia de código. A release do projecto também disponibiliza o manual em **PDF**, **Word** e pacote-fonte.
+
+[Descarregar a release mais recente](https://github.com/Jubilio/qgis-plugin-development-manual/releases/latest){.btn .btn-primary}
+
+::: {.callout-note}
+## Licenciamento
+
+A documentação é publicada sob **CC BY 4.0**. Os exemplos e snippets de código utilizam a licença **MIT**.
+:::

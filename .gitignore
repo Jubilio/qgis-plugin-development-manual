@@ -2,6 +2,9 @@ __pycache__/
 *.py[cod]
 .DS_Store
 Thumbs.db
+.quarto/
+_book/
+chapters/
 manual/_renders/
 manual/_contact*/
 manual/reference.docx

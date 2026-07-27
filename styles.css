@@ -1,0 +1,73 @@
+:root {
+  --qgis-teal: #0b4f5c;
+  --qgis-green: #2a7f78;
+  --qgis-orange: #e77a22;
+}
+
+.navbar,
+.sidebar-title {
+  font-weight: 700;
+}
+
+.hero {
+  padding: 2.75rem 2.5rem;
+  margin: 0 0 2rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(11, 79, 92, 0.12), rgba(42, 127, 120, 0.07));
+  border: 1px solid rgba(11, 79, 92, 0.18);
+}
+
+.hero h1 {
+  color: var(--qgis-teal);
+  max-width: 18ch;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.hero p {
+  max-width: 68ch;
+  font-size: 1.12rem;
+}
+
+.btn-primary {
+  background-color: var(--qgis-teal);
+  border-color: var(--qgis-teal);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--qgis-green);
+  border-color: var(--qgis-green);
+}
+
+h1,
+h2,
+h3 {
+  scroll-margin-top: 5rem;
+}
+
+h2 {
+  color: var(--qgis-teal);
+}
+
+h3 {
+  color: var(--qgis-green);
+}
+
+code {
+  font-variant-ligatures: none;
+}
+
+pre.sourceCode {
+  border-left: 0.25rem solid var(--qgis-orange);
+}
+
+.callout-note {
+  border-left-color: var(--qgis-green);
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 1.75rem 1.25rem;
+  }
+}
