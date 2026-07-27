@@ -17,7 +17,6 @@ book:
   repo-actions: [edit, issue]
   search: true
   sharing: [linkedin, twitter]
-  downloads: [pdf]
   page-footer:
     left: "© 2026 Jubílio Filiano Maússe"
     right: "Documentação sob CC BY 4.0"
@@ -57,16 +56,6 @@ format:
     code-overflow: wrap
     anchor-sections: true
     link-external-newwindow: true
-  pdf:
-    documentclass: scrreprt
-    toc: true
-    number-sections: true
-    colorlinks: true
-    geometry:
-      - top=22mm
-      - bottom=22mm
-      - left=24mm
-      - right=24mm
 
 execute:
   freeze: auto
