@@ -7,10 +7,16 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
-  render-and-publish:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +50,7 @@ jobs:
           fi
           touch _book/.nojekyll
 
-      - name: Upload rendered book
+      - name: Upload rendered book for review
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
@@ -52,12 +58,28 @@ jobs:
           path: _book/
           if-no-files-found: error
 
-      - name: Publish to gh-pages
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Configure GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_book
-          publish_branch: gh-pages
-          force_orphan: true
-          commit_message: "Publish Quarto book from ${{ github.sha }}"
+          path: _book/
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
