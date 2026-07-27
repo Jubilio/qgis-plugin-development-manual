@@ -3,24 +3,8 @@ name: Publish Quarto book
 on:
   workflow_dispatch:
   pull_request:
-    paths:
-      - "_quarto.yml"
-      - "index.qmd"
-      - "styles.css"
-      - "manual/**"
-      - "assets/**"
-      - "scripts/prepare_quarto.py"
-      - ".github/workflows/publish-quarto.yml"
   push:
     branches: [main]
-    paths:
-      - "_quarto.yml"
-      - "index.qmd"
-      - "styles.css"
-      - "manual/**"
-      - "assets/**"
-      - "scripts/prepare_quarto.py"
-      - ".github/workflows/publish-quarto.yml"
 
 permissions:
   contents: write
@@ -58,12 +42,22 @@ jobs:
             echo "The rendered book contains the unaccented family name"
             exit 1
           fi
+          touch _book/.nojekyll
 
-      - name: Publish to GitHub Pages
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Upload rendered book
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
         with:
-          target: gh-pages
-          render: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: quarto-book-html
+          path: _book/
+          if-no-files-found: error
+
+      - name: Publish to gh-pages
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_book
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: "Publish Quarto book from ${{ github.sha }}"
