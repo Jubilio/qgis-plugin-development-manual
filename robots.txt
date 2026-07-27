@@ -1,0 +1,1 @@
+Sitemap: https://jubilio.github.io/qgis-plugin-development-manual/sitemap.xml

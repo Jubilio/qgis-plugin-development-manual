@@ -1,0 +1,567 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Desenvolvimento de Plugins QGIS com Python",
+    "section": "",
+    "text": "1 Crie plugins QGIS robustos, testáveis e publicáveis\nUm manual prático em português para aprender Python, PyQGIS, interfaces Qt, tarefas em segundo plano, snapping, rede, testes, compatibilidade Qt 5/6 e publicação profissional.\nComeçar pelo prefácio Ver o código no GitHub",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Desenvolvimento de Plugins QGIS com Python</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#o-que-encontrará-neste-livro",
+    "href": "index.html#o-que-encontrará-neste-livro",
+    "title": "Desenvolvimento de Plugins QGIS com Python",
+    "section": "1.1 O que encontrará neste livro",
+    "text": "1.1 O que encontrará neste livro\n\n\n1.1.1 Do primeiro botão ao plugin completo\nEstrutura do pacote, metadata.txt, classFactory(), menus, barras de ferramentas, diálogos e painéis laterais.\n\n\n1.1.2 GIS e automação reais\nCamadas, CRS, formatos, tarefas em segundo plano, ferramentas de mapa, snapping e serviços de rede.\n\n\n1.1.3 Qualidade e publicação\nCompatibilidade QGIS 3/4 e Qt 5/6, segurança, testes, GitHub Actions, releases e submissão ao repositório oficial.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Desenvolvimento de Plugins QGIS com Python</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#estudos-de-caso",
+    "href": "index.html#estudos-de-caso",
+    "title": "Desenvolvimento de Plugins QGIS com Python",
+    "section": "1.2 Estudos de caso",
+    "text": "1.2 Estudos de caso\nO manual utiliza dois plugins desenvolvidos a partir de necessidades reais:\n\nGPX Batch Converter — conversão em lote, QgsTask, cancelamento, GDAL/OGR, relatórios e segurança;\nGeoClick Capture — ferramentas de mapa, snapping, transformação de coordenadas, sessões, geocodificação e painéis laterais.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Desenvolvimento de Plugins QGIS com Python</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#formatos-disponíveis",
+    "href": "index.html#formatos-disponíveis",
+    "title": "Desenvolvimento de Plugins QGIS com Python",
+    "section": "1.3 Formatos disponíveis",
+    "text": "1.3 Formatos disponíveis\nA versão web oferece pesquisa, navegação por capítulos, links directos para secções e cópia de código. A release do projecto também disponibiliza o manual em PDF, Word e pacote-fonte.\nDescarregar a release mais recente\n\n\n\n\n\n\nNotaLicenciamento\n\n\n\nA documentação é publicada sob CC BY 4.0. Os exemplos e snippets de código utilizam a licença MIT.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Desenvolvimento de Plugins QGIS com Python</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/00-prefacio.html",
+    "href": "chapters/00-prefacio.html",
+    "title": "2  Prefácio e roteiro de aprendizagem",
+    "section": "",
+    "text": "2.1 Prefácio\nEste manual foi concebido para quem utiliza QGIS e pretende passar de utilizador avançado a criador de ferramentas reutilizáveis. O objectivo não é apenas mostrar como colocar um botão no QGIS. O foco é ensinar um processo completo: identificar um problema, desenhar uma arquitectura simples, desenvolver uma interface segura, trabalhar com dados geográficos, manter compatibilidade entre versões, testar, empacotar, publicar e evoluir o plugin sem perder qualidade.\nOs exemplos centrais são dois plugins desenvolvidos a partir de necessidades reais:\nOs dois estudos de caso foram escolhidos porque representam famílias diferentes de plugins. O primeiro é orientado a processamento de ficheiros e tarefas demoradas. O segundo é orientado a interacção com o mapa, edição, rede e controlo de estado. Em conjunto, cobrem grande parte dos padrões encontrados no desenvolvimento profissional de extensões QGIS.\nEste texto usa Python, PyQGIS e qgis.PyQt. As práticas são pensadas para QGIS 3.28 ou superior e para a transição para QGIS 4 e Qt 6. A API evolui; por isso, antes de adoptar um método específico num projecto de longo prazo, consulte sempre a documentação da versão de QGIS que será suportada.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Prefácio e roteiro de aprendizagem</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/00-prefacio.html#prefácio",
+    "href": "chapters/00-prefacio.html#prefácio",
+    "title": "2  Prefácio e roteiro de aprendizagem",
+    "section": "",
+    "text": "GPX Batch Converter, que transforma lotes de ficheiros GPX em formatos GIS, suporta fusão, execução em segundo plano, cancelamento, relatórios e validações de segurança;\nGeoClick Capture, que regista cliques no mapa como pontos auditáveis, aplica snapping, transforma coordenadas, identifica feições, efectua geocodificação reversa opcional e organiza sessões num painel lateral.\n\n\n\n\n2.1.1 Como utilizar o manual\nO manual está organizado em seis partes:\n\nFundamentos - arquitectura, ambiente e planeamento;\nPrimeiro plugin - estrutura mínima, acções e interface;\nNível intermédio - camadas, CRS, ficheiros, tarefas, mapa e definições;\nNível avançado - Qt 5/6, segurança, testes, CI/CD e publicação;\nEstudos de caso - decisões reais dos dois plugins;\nProjecto prático - construção de um plugin completo e exercícios.\n\nPode seguir os capítulos em sequência ou usar o manual como referência. Os blocos Prática recomendada, Erro comum e Decisão de arquitectura destacam os pontos que normalmente causam falhas em produção.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Prefácio e roteiro de aprendizagem</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/00-prefacio.html#roteiro-de-aprendizagem",
+    "href": "chapters/00-prefacio.html#roteiro-de-aprendizagem",
+    "title": "2  Prefácio e roteiro de aprendizagem",
+    "section": "2.2 Roteiro de aprendizagem",
+    "text": "2.2 Roteiro de aprendizagem\nAo concluir este manual, o leitor deverá ser capaz de:\n\ndistinguir um script da consola Python, um algoritmo Processing e um plugin completo;\nestruturar um pacote instalável pelo gestor de plugins do QGIS;\nimplementar correctamente classFactory(), initGui(), run() e unload();\ncriar acções, menus, barras de ferramentas, diálogos e painéis laterais;\nutilizar widgets QGIS, como QgsMapLayerComboBox;\nler e escrever camadas vectoriais e transformar coordenadas entre CRS;\nexecutar tarefas demoradas sem bloquear a interface;\nadicionar cancelamento, progresso, logs e resultados estruturados;\ncriar ferramentas de clique e snapping no mapa;\nefectuar pedidos de rede através de QgsNetworkAccessManager;\npersistir preferências com QgsSettings;\nmanter compatibilidade entre Qt 5 e Qt 6;\nreduzir riscos relacionados com subprocessos, caminhos e serviços externos;\ncriar testes unitários e validações de pacote;\nautomatizar releases e preparar o plugin para o repositório oficial do QGIS.\n\n\n\n\nCiclo completo de desenvolvimento",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Prefácio e roteiro de aprendizagem</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-fundamentos.html",
+    "href": "chapters/01-fundamentos.html",
+    "title": "3  Parte I - Fundamentos",
+    "section": "",
+    "text": "3.1 1. O que é um plugin QGIS?\nUm plugin é um pacote de software carregado pelo QGIS para acrescentar comportamentos que não existem no núcleo da aplicação ou que precisam de ser adaptados a um fluxo específico. Um plugin pode ser pequeno, com uma única acção, ou incluir interfaces, algoritmos, painéis, serviços de rede, gestão de dados e automação.\nPython é a opção mais acessível para a maioria dos plugins QGIS porque não exige compilação separada para Windows, Linux e macOS. O pacote contém ficheiros Python, metadata, documentação e recursos. O gestor de plugins instala o ZIP e o QGIS importa o pacote no perfil do utilizador.",
+    "crumbs": [
+      "Parte I — Fundamentos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Parte I - Fundamentos</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-fundamentos.html#o-que-é-um-plugin-qgis",
+    "href": "chapters/01-fundamentos.html#o-que-é-um-plugin-qgis",
+    "title": "3  Parte I - Fundamentos",
+    "section": "",
+    "text": "3.1.1 1.1 Script, algoritmo Processing ou plugin?\nUse a consola Python quando:\n\npretende testar uma ideia rapidamente;\no código será executado poucas vezes;\nnão precisa de distribuição nem de interface estável.\n\nUse um algoritmo Processing quando:\n\na função recebe dados, parâmetros e produz resultados;\no fluxo deve funcionar em lote, no modelador ou por linha de comandos;\nnão precisa de interacção contínua com o mapa.\n\nUse um plugin completo quando:\n\nprecisa de menu, barra de ferramentas, diálogo ou painel;\nprecisa de manter estado entre acções;\nreage a cliques, mudanças de projecto ou selecção de camadas;\nintegra tarefas, rede, edição ou múltiplos serviços.\n\nO GPX Batch Converter poderia, em parte, ser um algoritmo Processing. Contudo, a necessidade de resultados tabulares, cancelamento, selecção de formatos, relatórios e gestão de tarefas justificou uma interface própria. O GeoClick Capture necessita de um plugin completo porque mantém uma ferramenta de mapa activa, um painel de sessão e preferências persistentes.\n\n\n3.1.2 1.2 O contrato entre QGIS e o plugin\nO QGIS não adivinha como iniciar o código. Ele procura uma pasta válida, lê metadata.txt, importa __init__.py e chama classFactory(iface). Esta função devolve uma instância da classe principal. Depois, o QGIS chama initGui() para registar a interface e unload() quando o plugin é desactivado.\nO objecto iface é a principal porta de entrada para a interface do QGIS. Através dele, o plugin acede ao mapa, à janela principal, aos menus, à barra de mensagens e a outros componentes.\n\n\n\nArquitectura simplificada\n\n\n\n\n3.1.3 1.3 Princípio fundamental: resolver um problema definido\nAntes de escrever código, responda:\n\nQuem utilizará o plugin?\nQual é a tarefa repetitiva ou propensa a erro?\nQuais entradas e saídas são necessárias?\nO QGIS já possui a funcionalidade?\nExiste um plugin semelhante?\nO plugin deve funcionar sem Internet?\nQue versões de QGIS e sistemas operativos serão suportadas?\nComo o utilizador saberá que a operação terminou ou falhou?\n\nUm escopo bem definido evita um plugin que tenta fazer tudo e não executa nada com clareza.\n\nEstudo de caso - diferenciação: o projecto inicialmente chamado QGIS LatLon sobrepunha-se a ferramentas existentes de coordenadas. O reposicionamento para GeoClick Capture definiu um propósito distinto: criar registos auditáveis de cliques, com sessão, metadados, snapping e revisão.",
+    "crumbs": [
+      "Parte I — Fundamentos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Parte I - Fundamentos</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-fundamentos.html#ambiente-de-desenvolvimento",
+    "href": "chapters/01-fundamentos.html#ambiente-de-desenvolvimento",
+    "title": "3  Parte I - Fundamentos",
+    "section": "3.2 2. Ambiente de desenvolvimento",
+    "text": "3.2 2. Ambiente de desenvolvimento\n\n3.2.1 2.1 Instalações recomendadas\nPrepare:\n\nQGIS suportado pelo projecto;\neditor como Visual Studio Code, PyCharm ou outro com suporte Python;\nGit;\nPlugin Reloader, para recarregar o plugin durante o desenvolvimento;\nopcionalmente Qt Designer, para interfaces .ui;\numa pasta de dados mínimos de teste.\n\nAo suportar QGIS 3 e 4, mantenha pelo menos um ambiente de teste para cada geração. Testar apenas no QGIS instalado no computador do autor é insuficiente.\n\n\n3.2.2 2.2 Pasta de plugins do perfil\nEm Windows, as localizações mais comuns são:\nC:\\Users\\&lt;UTILIZADOR&gt;\\AppData\\Roaming\\QGIS\\QGIS3\\profiles\\default\\python\\plugins\\\nC:\\Users\\&lt;UTILIZADOR&gt;\\AppData\\Roaming\\QGIS\\QGIS4\\profiles\\default\\python\\plugins\\\nEm Linux:\n~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/\n~/.local/share/QGIS/QGIS4/profiles/default/python/plugins/\nO nome da pasta deve ser um identificador Python válido. Use letras minúsculas, números e _. Não use hífen.\ncorrecto:   quick_point_logger\nincorrecto: quick-point-logger\n\n\n3.2.3 2.3 Instalação de desenvolvimento\nPode copiar a pasta ou cloná-la directamente no perfil:\ngit clone https://github.com/UTILIZADOR/REPOSITORIO.git quick_point_logger\nDurante o desenvolvimento:\n\naltere o código no editor;\nguarde os ficheiros;\nrecarregue o plugin;\nteste o fluxo afectado;\nconsulte o painel Log Messages e a consola Python.\n\n\n\n3.2.4 2.4 Organização do repositório\nUma estrutura prática é:\nproject-root/\n├── .github/workflows/\n├── docs/\n├── sample_data/\n├── tests/\n├── quick_point_logger/\n│   ├── __init__.py\n│   ├── metadata.txt\n│   ├── plugin.py\n│   ├── dialog.py\n│   ├── icons/\n│   ├── LICENSE\n│   └── README.md\n├── CHANGELOG.md\n├── LICENSE\n└── README.md\nO ZIP instalável deve conter apenas a pasta do plugin como directório de topo. O repositório pode ter testes e documentação adicionais fora dessa pasta.",
+    "crumbs": [
+      "Parte I — Fundamentos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Parte I - Fundamentos</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/01-fundamentos.html#planeamento-e-arquitectura",
+    "href": "chapters/01-fundamentos.html#planeamento-e-arquitectura",
+    "title": "3  Parte I - Fundamentos",
+    "section": "3.3 3. Planeamento e arquitectura",
+    "text": "3.3 3. Planeamento e arquitectura\n\n3.3.1 3.1 Escrever uma especificação curta\nAntes do código, escreva uma página com:\n\nproblema;\nutilizadores;\nfuncionalidades obrigatórias;\nfuncionalidades futuras;\ndados de entrada e saída;\ndependências;\nrestrições de segurança;\ncritérios de aceitação.\n\nExemplo para o GPX Batch Converter:\nProblema: converter centenas de GPX manualmente é demorado e inconsistente.\nEntradas: pasta com .gpx, tipos de subcamada, formato de saída.\nSaídas: ficheiros GIS, relatório de resultados e mensagens de erro.\nCritérios: interface responsiva, cancelamento, nomes seguros, sem shell=True.\n\n\n3.3.2 3.2 Separar interface, lógica e infra-estrutura\nEvite colocar toda a aplicação num único método de botão. Uma divisão mínima:\n\nclasse principal: integração com QGIS;\ndiálogo/painel: widgets e sinais;\nserviço ou tarefa: processamento;\nutilitários: validação, nomes, compatibilidade;\ntestes: funções independentes e regras de pacote.\n\nA separação melhora testes, manutenção e compatibilidade. No GPX Batch Converter, a classe principal regista a acção, o diálogo recolhe opções e GpxConversionTask executa o lote. No GeoClick Capture, a classe principal gere o mapa, enquanto o painel gere a sessão e a tabela.\n\n\n3.3.3 3.3 Estado do plugin\nIdentifique o estado que precisa de ser mantido:\n\nacções e widgets;\nferramenta de mapa activa;\ncamada de destino;\ntarefa em execução;\npedidos de rede pendentes;\núltima coordenada;\npreferências;\nresultados da última operação.\n\nTodo recurso criado em initGui() deve ser removido, fechado ou cancelado em unload().",
+    "crumbs": [
+      "Parte I — Fundamentos",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Parte I - Fundamentos</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-primeiro-plugin.html",
+    "href": "chapters/02-primeiro-plugin.html",
+    "title": "4  Parte II - O primeiro plugin",
+    "section": "",
+    "text": "4.1 4. Estrutura mínima do pacote",
+    "crumbs": [
+      "Parte II — O primeiro plugin",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Parte II - O primeiro plugin</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-primeiro-plugin.html#estrutura-mínima-do-pacote",
+    "href": "chapters/02-primeiro-plugin.html#estrutura-mínima-do-pacote",
+    "title": "4  Parte II - O primeiro plugin",
+    "section": "",
+    "text": "4.1.1 4.1 metadata.txt\nO metadata.txt descreve o plugin ao QGIS e ao repositório oficial.\n[general]\nname=Quick Point Logger\ndescription=Captures map clicks into a temporary point layer.\nversion=0.1.0\nqgisMinimumVersion=3.28\nqgisMaximumVersion=4.99\nauthor=Seu Nome\nemail=nome@example.org\nhomepage=https://github.com/user/quick-point-logger#readme\nrepository=https://github.com/user/quick-point-logger\ntracker=https://github.com/user/quick-point-logger/issues\nlicense=MIT\ncategory=Vector\ntags=point,capture,coordinates,logging\nexperimental=True\ndeprecated=False\nhasProcessingProvider=False\nsupportsQt6=True\nicon=icons/capture.svg\n\n4.1.1.1 Campos essenciais\n\nname: nome público, estável e distinto;\ndescription: uma frase curta;\nabout: explicação detalhada, dependências e limitações;\nversion: versão SemVer;\nqgisMinimumVersion e qgisMaximumVersion;\nrepository, tracker, homepage e license;\nsupportsQt6=True quando validado para Qt 6.\n\nO repositório oficial exige documentação mínima, links funcionais, licença compatível, descrição em inglês, ausência de binários e um pacote dentro do limite de tamanho aplicável.\n\n\n\n4.1.2 4.2 __init__.py\ndef classFactory(iface):\n    \"\"\"Return the plugin instance used by QGIS.\"\"\"\n    from .plugin import QuickPointLoggerPlugin\n    return QuickPointLoggerPlugin(iface)\nMantenha esta função pequena. A importação dentro de classFactory() reduz efeitos colaterais durante a descoberta do plugin.\n\n\n4.1.3 4.3 Classe principal\nfrom pathlib import Path\n\nfrom qgis.PyQt.QtGui import QIcon\nfrom qgis.PyQt.QtWidgets import QAction\n\n\nclass QuickPointLoggerPlugin:\n    MENU = \"&Quick Point Logger\"\n\n    def __init__(self, iface):\n        self.iface = iface\n        self.action = None\n        self.icon_path = Path(__file__).parent / \"icons\" / \"capture.svg\"\n\n    def initGui(self):\n        self.action = QAction(\n            QIcon(str(self.icon_path)),\n            \"Quick Point Logger\",\n            self.iface.mainWindow(),\n        )\n        self.action.triggered.connect(self.run)\n        self.iface.addPluginToVectorMenu(self.MENU, self.action)\n        self.iface.addToolBarIcon(self.action)\n\n    def run(self):\n        self.iface.messageBar().pushInfo(\n            \"Quick Point Logger\",\n            \"The plugin is running.\",\n        )\n\n    def unload(self):\n        if self.action is None:\n            return\n        self.iface.removePluginVectorMenu(self.MENU, self.action)\n        self.iface.removeToolBarIcon(self.action)\n        self.action.deleteLater()\n        self.action = None\nEste padrão aparece no GPX Batch Converter: initGui() cria QAction, associa triggered ao método run(), adiciona ao menu Vector e à barra; unload() remove os elementos e fecha a interface.\n\n\n4.1.4 4.4 Ciclo de vida e limpeza\nUm plugin que funciona ao activar, mas deixa sinais ou tarefas depois de desactivar, é instável. No unload():\n\ndesassocie ou remova acções;\ncancele tarefas activas;\naborte respostas de rede;\nremova painéis;\ndesactive ferramentas de mapa;\nchame deleteLater() para widgets Qt;\nlimpe referências Python.",
+    "crumbs": [
+      "Parte II — O primeiro plugin",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Parte II - O primeiro plugin</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-primeiro-plugin.html#acções-menus-e-barra-de-ferramentas",
+    "href": "chapters/02-primeiro-plugin.html#acções-menus-e-barra-de-ferramentas",
+    "title": "4  Parte II - O primeiro plugin",
+    "section": "4.2 5. Acções, menus e barra de ferramentas",
+    "text": "4.2 5. Acções, menus e barra de ferramentas\nQAction representa uma operação reutilizável. A mesma acção pode estar no menu e na barra.\nself.action = QAction(QIcon(icon_path), \"Converter GPX\", parent)\nself.action.setObjectName(\"gpxBatchConverterAction\")\nself.action.setStatusTip(\"Converter vários ficheiros GPX\")\nself.action.triggered.connect(self.run)\nEscolha o menu por domínio:\n\nVector para operações vectoriais;\nRaster para raster;\nWeb para serviços Web;\nDatabase para bases de dados.\n\nNão crie um menu de topo desnecessário para uma única acção.\n\n4.2.1 5.1 Acções verificáveis\nPara ligar e desligar modos:\nself.capture_action.setCheckable(True)\nself.capture_action.toggled.connect(self.activate_capture)\nSincronize o estado entre toolbar, menu e painel. Ao mudar programaticamente, bloqueie sinais para evitar ciclos:\nself.capture_action.blockSignals(True)\nself.capture_action.setChecked(enabled)\nself.capture_action.blockSignals(False)\n\n\n4.2.2 5.2 Ícones\nUse SVG simples ou PNG optimizado. O ícone deve permanecer legível em 16, 24 e 32 pixels. Use caminhos relativos ao pacote:\nICON_DIR = Path(__file__).parent / \"icons\"\nQIcon(str(ICON_DIR / \"capture.svg\"))\nGeoClick Capture 1.2.6 usa ícones separados para captura, log, snapping, geocodificação, exportação, undo, eliminação e sessões. A distinção visual reduz erros operacionais.",
+    "crumbs": [
+      "Parte II — O primeiro plugin",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Parte II - O primeiro plugin</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-primeiro-plugin.html#interfaces-qdialog-e-qdockwidget",
+    "href": "chapters/02-primeiro-plugin.html#interfaces-qdialog-e-qdockwidget",
+    "title": "4  Parte II - O primeiro plugin",
+    "section": "4.3 6. Interfaces: QDialog e QDockWidget",
+    "text": "4.3 6. Interfaces: QDialog e QDockWidget\n\n4.3.1 6.1 Quando usar cada um\nUse QDialog para uma tarefa com início e fim, como converter ficheiros. Use QDockWidget para uma ferramenta que acompanha o trabalho no mapa, como um log de captura.\nGPX Batch Converter: diálogo com pastas, formatos, opções, progresso e resultados.\nGeoClick Capture: painel lateral com sessão, camada, snapping, tabela e exportação.\n\n\n4.3.2 6.2 Interface programática ou Qt Designer\nInterface programática:\n\nfacilita compatibilidade e revisão de código;\nnão exige compilar .ui;\nfunciona bem para formulários médios.\n\nQt Designer:\n\nacelera layouts complexos;\nsepara desenho visual;\nexige estratégia para carregar .ui sem ficheiros gerados desnecessários.\n\nO repositório oficial recomenda evitar ficheiros gerados como ui_*.py quando não são necessários. Pode carregar o .ui em tempo de execução.\n\n\n4.3.3 6.3 Um selector de pasta reutilizável\nclass FolderSelector(QWidget):\n    def __init__(self, title, parent=None):\n        super().__init__(parent)\n        self.title = title\n        self.path_edit = QLineEdit()\n        self.browse_button = QPushButton(\"Browse...\")\n        self.browse_button.clicked.connect(self.browse)\n\n        layout = QHBoxLayout(self)\n        layout.setContentsMargins(0, 0, 0, 0)\n        layout.addWidget(self.path_edit, 1)\n        layout.addWidget(self.browse_button)\n\n    def browse(self):\n        selected = QFileDialog.getExistingDirectory(self, self.title)\n        if selected:\n            self.path_edit.setText(selected)\nTransformar um conjunto repetido de widgets numa classe reduz duplicação e facilita validação.\n\n\n4.3.4 6.4 Widgets QGIS\nSempre que possível, use widgets que conhecem o projecto. Exemplo:\nfrom qgis.core import Qgis, QgsMapLayerProxyModel\nfrom qgis.gui import QgsMapLayerComboBox\n\nself.layer_combo = QgsMapLayerComboBox()\npoint_filter = getattr(QgsMapLayerProxyModel, \"PointLayer\", None)\nif point_filter is None:\n    point_filter = Qgis.LayerFilter.PointLayer\nself.layer_combo.setFilters(point_filter)\nself.layer_combo.setAllowEmptyLayer(True)\nself.layer_combo.setShowCrs(True)\nQgsMapLayerComboBox acompanha camadas adicionadas, removidas e renomeadas. Uma QComboBox manual torna-se rapidamente desactualizada.",
+    "crumbs": [
+      "Parte II — O primeiro plugin",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Parte II - O primeiro plugin</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/02-primeiro-plugin.html#validação-de-entradas-e-experiência-do-utilizador",
+    "href": "chapters/02-primeiro-plugin.html#validação-de-entradas-e-experiência-do-utilizador",
+    "title": "4  Parte II - O primeiro plugin",
+    "section": "4.4 7. Validação de entradas e experiência do utilizador",
+    "text": "4.4 7. Validação de entradas e experiência do utilizador\nValide antes de iniciar trabalho pesado:\n\npasta de entrada existe;\npasta de saída pode ser criada;\nexiste pelo menos um ficheiro compatível;\npelo menos uma camada ou opção foi seleccionada;\nexecutáveis necessários foram encontrados;\ncamada de destino é válida e tem geometria adequada;\ncaminhos não são iguais quando isso causa sobrescrita perigosa.\n\nMensagens de erro devem indicar acção correctiva:\nFraco: Conversion failed.\nMelhor: No .gpx files were found in the selected input folder.\nEvite caixas modais para cada aviso dentro de um lote. Use log, tabela de resultados e resumo final.",
+    "crumbs": [
+      "Parte II — O primeiro plugin",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Parte II - O primeiro plugin</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html",
+    "href": "chapters/03-desenvolvimento-intermedio.html",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "",
+    "text": "5.1 8. Trabalhar com projectos e camadas",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#trabalhar-com-projectos-e-camadas",
+    "href": "chapters/03-desenvolvimento-intermedio.html#trabalhar-com-projectos-e-camadas",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "",
+    "text": "5.1.1 8.1 QgsProject\nA instância actual:\nproject = QgsProject.instance()\nAdicionar camada:\nlayer = QgsVectorLayer(path, layer_name, \"ogr\")\nif layer.isValid():\n    project.addMapLayer(layer)\nNunca assuma que a camada carregou. Valide e registe a mensagem do fornecedor quando disponível.\n\n\n5.1.2 8.2 Camada de memória\nGeoClick Capture cria uma camada temporária quando não existe destino:\nlayer = QgsVectorLayer(\n    \"Point?crs=EPSG:4326\",\n    \"Captured Points Log\",\n    \"memory\",\n)\nprovider = layer.dataProvider()\nprovider.addAttributes([\n    QgsField(\"id\", QVariant.Int),\n    QgsField(\"captured_at\", QVariant.String),\n    QgsField(\"lat\", QVariant.Double),\n    QgsField(\"lon\", QVariant.Double),\n])\nlayer.updateFields()\nQgsProject.instance().addMapLayer(layer)\nUma camada de memória é útil para sessões temporárias. Para persistência imediata, prefira GeoPackage.\n\n\n5.1.3 8.3 Adicionar feições\nfeature = QgsFeature(layer.fields())\nfeature.setGeometry(QgsGeometry.fromPointXY(point))\nfeature[\"id\"] = next_id\nfeature[\"captured_at\"] = timestamp\nfeature[\"lat\"] = latitude\nfeature[\"lon\"] = longitude\n\nok, created = layer.dataProvider().addFeatures([feature])\nif not ok:\n    raise RuntimeError(\"The point could not be added.\")\nConsidere edição transaccional e undo/redo quando altera camadas existentes do utilizador. Para camadas geridas pelo plugin, a escrita directa pelo provider pode ser suficiente, desde que os IDs e campos sejam controlados.",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#sistemas-de-referência-e-coordenadas",
+    "href": "chapters/03-desenvolvimento-intermedio.html#sistemas-de-referência-e-coordenadas",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "5.2 9. Sistemas de referência e coordenadas",
+    "text": "5.2 9. Sistemas de referência e coordenadas\n\n5.2.1 9.1 Nunca confundir coordenadas do mapa com latitude/longitude\nO clique é devolvido no CRS do mapa. Se o projecto estiver em UTM, os valores podem ser Este/Norte em metros, não longitude/latitude.\nproject_crs = canvas.mapSettings().destinationCrs()\nwgs84 = QgsCoordinateReferenceSystem(\"EPSG:4326\")\ntransform = QgsCoordinateTransform(\n    project_crs,\n    wgs84,\n    QgsProject.instance(),\n)\nwgs84_point = transform.transform(map_point)\nlon = float(wgs84_point.x())\nlat = float(wgs84_point.y())\n\n\n5.2.2 9.2 Transformar para a camada de destino\nSe a camada de destino tem outro CRS, transforme a geometria antes de gravar:\nlayer_transform = QgsCoordinateTransform(\n    project_crs,\n    layer.crs(),\n    QgsProject.instance(),\n)\nlayer_point = layer_transform.transform(map_point)\n\n\n5.2.3 9.3 Guardar ambos os sistemas\nPara auditoria, é útil guardar:\n\nlatitude e longitude em WGS 84;\nX e Y no CRS do projecto;\nidentificador ou descrição do CRS;\ngeometria no CRS da camada de destino.\n\nEsta estratégia foi adoptada pelo GeoClick Capture e facilita comparação com mapas, GPS e bases institucionais.",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#leitura-de-gpx-e-escrita-de-formatos-gis",
+    "href": "chapters/03-desenvolvimento-intermedio.html#leitura-de-gpx-e-escrita-de-formatos-gis",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "5.3 10. Leitura de GPX e escrita de formatos GIS",
+    "text": "5.3 10. Leitura de GPX e escrita de formatos GIS\nUm ficheiro GPX pode expor subcamadas:\n\nwaypoints;\nroutes;\nroute_points;\ntracks;\ntrack_points.\n\nNem todos os ficheiros possuem todas as subcamadas. Ausência não é, por si só, erro.\n\n5.3.1 10.1 Abrir subcamada GPX\nuri = f\"{gpx_path}?type={layer_name}\"\nsource = QgsVectorLayer(uri, layer_name, \"gpx\")\nif not source.isValid() or source.featureCount() == 0:\n    # Registar como missing/empty, não como falha fatal.\n    return\n\n\n5.3.2 10.2 Escolher formatos de saída\nUma tabela de configuração reduz condicionais:\nOUTPUT_FORMATS = {\n    \"ESRI Shapefile\": {\n        \"driver\": \"ESRI Shapefile\",\n        \"extension\": \".shp\",\n        \"layer_creation_options\": [\"ENCODING=UTF-8\"],\n    },\n    \"GeoPackage\": {\n        \"driver\": \"GPKG\",\n        \"extension\": \".gpkg\",\n        \"layer_creation_options\": [],\n    },\n    \"GeoJSON\": {\n        \"driver\": \"GeoJSON\",\n        \"extension\": \".geojson\",\n        \"layer_creation_options\": [],\n    },\n}\n\n\n5.3.3 10.3 Limitações do Shapefile\nO Shapefile é amplamente suportado, mas possui limitações:\n\nnomes de campos curtos;\nconjunto de ficheiros relacionados;\ntipos de dados limitados;\ndificuldades de encoding;\num tipo de geometria por camada.\n\nPara dados modernos, GeoPackage é muitas vezes a melhor saída padrão. Contudo, mantenha Shapefile quando a interoperabilidade institucional exigir.\n\n\n5.3.4 10.4 Proveniência\nAo fundir dados, adicione campos que identifiquem a origem:\nsource_file\nsource_path\nsource_layer\nSem proveniência, a fusão reduz rastreabilidade. O GPX Batch Converter inclui estes campos nos resultados fundidos.",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#tarefas-em-segundo-plano",
+    "href": "chapters/03-desenvolvimento-intermedio.html#tarefas-em-segundo-plano",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "5.4 11. Tarefas em segundo plano",
+    "text": "5.4 11. Tarefas em segundo plano\nOperações longas não devem executar no thread da interface. Um ciclo com centenas de ficheiros pode congelar o QGIS e levar o utilizador a encerrar a aplicação.\n\n5.4.1 11.1 QgsTask\nclass ConversionTask(QgsTask):\n    def __init__(self, files, callback):\n        super().__init__(\"Convert files\", task_can_cancel_flag())\n        self.files = files\n        self.callback = callback\n        self.results = []\n        self.error = None\n\n    def run(self):\n        try:\n            for index, path in enumerate(self.files, start=1):\n                if self.isCanceled():\n                    return False\n                self.convert_one(path)\n                self.setProgress(index / len(self.files) * 100)\n            return True\n        except Exception as exc:\n            self.error = exc\n            return False\n\n    def finished(self, result):\n        self.callback(self, result)\nAdicionar ao gestor:\nQgsApplication.taskManager().addTask(task)\n\n\n5.4.2 11.2 Regra do thread principal\nNo método run() de uma tarefa:\n\nnão altere widgets;\nnão adicione camadas ao projecto;\nnão aceda a objectos Qt que pertençam ao thread principal;\ntrabalhe com dados independentes, caminhos e APIs thread-safe.\n\nNo finished() ou callback:\n\nactualize a interface;\nadicione saídas ao projecto;\napresente o resumo.\n\n\n\n5.4.3 11.3 Cancelamento\nCancelamento deve ser cooperativo. Verifique isCanceled() em intervalos curtos. Se existe processo externo activo, termine-o com timeout e depois force a paragem, registando falhas.\nNo GPX Batch Converter, a tarefa mantém referência ao processo GDAL actual, chama terminate(), aguarda e usa kill() apenas quando necessário.",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#resultados-progresso-e-logs",
+    "href": "chapters/03-desenvolvimento-intermedio.html#resultados-progresso-e-logs",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "5.5 12. Resultados, progresso e logs",
+    "text": "5.5 12. Resultados, progresso e logs\nUma barra de progresso isolada não explica o que aconteceu. Para lotes, mantenha uma lista de resultados com:\nsource_file\nlayer\nstatus\nfeature_count\noutput_path\nmessage\nEstados recomendados:\n\nconverted;\nmerged;\nincluded;\nmissing_or_empty;\nskipped_existing;\nfailed;\ncancelled.\n\nO resumo deve separar falhas reais de camadas ausentes. Isto evita que um GPX sem waypoints seja apresentado como erro.\n\n5.5.1 12.1 Mensagens no QGIS\nself.iface.messageBar().pushMessage(\n    \"Plugin\",\n    \"Conversion completed.\",\n    level=success_level,\n    duration=5,\n)\nPara diagnóstico técnico:\nQgsMessageLog.logMessage(\n    detailed_message,\n    \"My Plugin\",\n    level=Qgis.MessageLevel.Warning,\n)\nNão mostre dados sensíveis, tokens ou caminhos confidenciais em logs públicos.",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#ferramentas-de-mapa",
+    "href": "chapters/03-desenvolvimento-intermedio.html#ferramentas-de-mapa",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "5.6 13. Ferramentas de mapa",
+    "text": "5.6 13. Ferramentas de mapa\nPara responder a cliques:\nfrom qgis.gui import QgsMapToolEmitPoint\n\nself.tool = QgsMapToolEmitPoint(self.canvas)\nself.tool.canvasClicked.connect(self.handle_map_click)\nself.canvas.setMapTool(self.tool)\nAo desactivar:\nif self.canvas.mapTool() is self.tool:\n    self.canvas.unsetMapTool(self.tool)\n\n5.6.1 13.1 Identificar a feição sob o clique\nQgsMapToolIdentify pode devolver a camada e a feição. Restrinja a pesquisa a camadas relevantes e visíveis quando possível. Guarde nome, ID da camada e ID da feição para auditoria.\n\n\n5.6.2 13.2 Estado visual\nA acção de captura deve ser verificável. O painel e a toolbar devem mostrar o mesmo estado. Mostre uma mensagem curta quando o modo é activado.",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#snapping-a-vértices-e-segmentos",
+    "href": "chapters/03-desenvolvimento-intermedio.html#snapping-a-vértices-e-segmentos",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "5.7 14. Snapping a vértices e segmentos",
+    "text": "5.7 14. Snapping a vértices e segmentos\nSnapping melhora precisão e evita pontos quase coincidentes.\nEstratégia robusta:\n\nusar a configuração de snapping do projecto;\nse não existir correspondência, procurar camadas visíveis de linha e polígono;\ndar prioridade ao vértice mais próximo;\nusar o segmento mais próximo apenas quando nenhum vértice está dentro da tolerância;\nregistar se houve snapping, o tipo e a distância.\n\n\n\n\nFluxo de captura do GeoClick Capture\n\n\n\n5.7.1 14.1 Tolerância em pixels\nA tolerância em pixels oferece experiência consistente em diferentes escalas. Converta para unidades do mapa:\ntolerance_map = tolerance_pixels * canvas.mapUnitsPerPixel()\nQuando a camada tem CRS diferente, transforme o ponto e uma distância de referência para estimar a tolerância na unidade da camada.\n\n\n5.7.2 14.2 Auditoria do snapping\nCampos úteis:\nsnapped        boolean\nsnap_type      vertex | segment | project snapping\nsnap_distance  distância em unidades do mapa",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#pedidos-de-rede-e-geocodificação-reversa",
+    "href": "chapters/03-desenvolvimento-intermedio.html#pedidos-de-rede-e-geocodificação-reversa",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "5.8 15. Pedidos de rede e geocodificação reversa",
+    "text": "5.8 15. Pedidos de rede e geocodificação reversa\nPlugins QGIS devem utilizar QgsNetworkAccessManager para respeitar proxy, autenticação e definições de rede da aplicação.\nmanager = QgsNetworkAccessManager.instance()\nrequest = QNetworkRequest(QUrl(url))\nreply = manager.get(request)\nreply.finished.connect(lambda: self.handle_reply(reply))\n\n5.8.1 15.1 Regras de um cliente responsável\n\nidentificar a aplicação no User-Agent;\nrespeitar limites do fornecedor;\nadicionar timeout;\ntratar redireccionamentos com segurança;\nvalidar HTTP, rede, SSL e JSON;\narmazenar cache;\nevitar pedidos duplicados;\npermitir desligar a funcionalidade;\nmanter a função principal independente da rede.\n\nNo GeoClick Capture, o ponto é sempre guardado primeiro. A geocodificação actualiza o campo de localização depois. Assim, falha de Internet não causa perda do registo.\n\n\n5.8.2 15.2 Sem resultado não é falha de rede\nUm serviço pode responder que não encontrou endereço. Trate separadamente:\n\nfalha de ligação;\nlimite HTTP 429;\nrejeição 403;\nerro do servidor;\nresposta válida sem endereço.\n\nUma estratégia de fallback pode pedir níveis mais amplos: endereço, assentamento, cidade, província e país. Respeite o intervalo mínimo entre pedidos.",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/03-desenvolvimento-intermedio.html#preferências-persistentes",
+    "href": "chapters/03-desenvolvimento-intermedio.html#preferências-persistentes",
+    "title": "5  Parte III - Desenvolvimento intermédio",
+    "section": "5.9 16. Preferências persistentes",
+    "text": "5.9 16. Preferências persistentes\nQgsSettings guarda opções por utilizador:\nsettings = QgsSettings()\nsettings.setValue(\"my_plugin/operator\", operator_name)\noperator_name = settings.value(\"my_plugin/operator\", \"\", type=str)\nUse um prefixo exclusivo. Guarde apenas preferências, não dados sensíveis.\nExemplos:\n\núltima pasta de saída;\nformato preferido;\ngeocodificação ligada/desligada;\nnome do operador;\ntolerância de snapping;\ncamada seleccionada, quando a referência puder ser restaurada com segurança.",
+    "crumbs": [
+      "Parte III — Desenvolvimento intermédio",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Parte III - Desenvolvimento intermédio</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html",
+    "href": "chapters/04-desenvolvimento-avancado.html",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "",
+    "text": "6.1 17. Compatibilidade QGIS 3/4 e Qt 5/6\nA transição para Qt 6 introduziu enums scoped. Código antigo:\nCódigo Qt 6:\nPara suportar ambas as gerações, resolva em tempo de execução:",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html#compatibilidade-qgis-34-e-qt-56",
+    "href": "chapters/04-desenvolvimento-avancado.html#compatibilidade-qgis-34-e-qt-56",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "",
+    "text": "Qt.RightDockWidgetArea\nQMessageBox.Yes\nQgsWkbTypes.PointGeometry\n\nQt.DockWidgetArea.RightDockWidgetArea\nQMessageBox.StandardButton.Yes\nQgsWkbTypes.GeometryType.PointGeometry\n\ndef compat_enum(container, scoped_container, member, legacy):\n    scoped = getattr(container, scoped_container, None)\n    if scoped is not None:\n        return getattr(scoped, member)\n    return getattr(container, legacy)\n\nRIGHT_DOCK_AREA = compat_enum(\n    Qt,\n    \"DockWidgetArea\",\n    \"RightDockWidgetArea\",\n    \"RightDockWidgetArea\",\n)\n\n6.1.1 17.1 Importações\nUse sempre:\nfrom qgis.PyQt.QtCore import Qt\nfrom qgis.PyQt.QtWidgets import QAction\nEvite importar directamente de PyQt5 ou PyQt6. O módulo qgis.PyQt selecciona a implementação fornecida pelo QGIS.\n\n\n6.1.2 17.2 Testes estáticos de enums\nUm teste simples pode analisar AST e proibir acessos antigos no código executável. AST é superior à procura textual porque comentários podem mencionar nomes antigos sem representar erro.",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html#segurança",
+    "href": "chapters/04-desenvolvimento-avancado.html#segurança",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "6.2 18. Segurança",
+    "text": "6.2 18. Segurança\n\n6.2.1 18.1 Subprocessos\nQuando um plugin chama GDAL ou outra ferramenta:\n\nlocalize executáveis confiáveis;\nresolva caminhos absolutos;\nvalide cada argumento;\npasse argumentos numa lista ou tuplo;\nuse shell=False;\nrejeite bytes nulos;\nnão construa comandos com concatenação de entrada do utilizador;\nlimite o ambiente quando necessário;\ncapture stdout, stderr e código de saída.\n\nprocess = subprocess.Popen(\n    validated_command,\n    shell=False,\n    stdout=subprocess.PIPE,\n    stderr=subprocess.PIPE,\n    text=True,\n    encoding=\"utf-8\",\n    errors=\"replace\",\n)\nNo GPX Batch Converter, apenas os caminhos absolutos detectados para ogr2ogr e ogrinfo são permitidos.\n\n\n6.2.2 18.2 SQL, expressões e nomes\nEvite SQL montado dinamicamente com nomes de ficheiros. Use APIs OGR/PyQGIS, parâmetros e identificadores validados. Normalize nomes de ficheiro:\ndef clean_filename(name, fallback=\"output\"):\n    cleaned = re.sub(r\"[^\\w\\s-]\", \"\", str(name), flags=re.UNICODE)\n    cleaned = re.sub(r\"[-\\s]+\", \"_\", cleaned).strip(\"_\")\n    return cleaned or fallback\n\n\n6.2.3 18.3 Rede\n\nHTTPS;\nredireccionamentos limitados;\nsem tokens em URL ou log;\ntimeout;\nvalidação de resposta;\ncache;\npolítica de privacidade documentada.\n\n\n\n6.2.4 18.4 Dados locais\nNão apague ou sobrescreva sem consentimento claro. Para Shapefile, considere todos os componentes. Quando o output está aberto no QGIS, a escrita pode falhar por bloqueio; apresente instruções úteis.",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html#testes",
+    "href": "chapters/04-desenvolvimento-avancado.html#testes",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "6.3 19. Testes",
+    "text": "6.3 19. Testes\n\n6.3.1 19.1 Pirâmide prática\n\nFunções puras: nomes, validação, extensão, cache key;\nTestes de metadata e pacote;\nTestes estáticos: enums, caminhos, imports proibidos;\nTestes PyQGIS: camadas, transformações, escrita;\nTestes manuais: interface, mapa, rede e plataformas.\n\n\n\n6.3.2 19.2 unittest\nimport unittest\n\nfrom my_plugin.utils import clean_filename\n\n\nclass FilenameTests(unittest.TestCase):\n    def test_removes_unsupported_characters(self):\n        self.assertEqual(clean_filename(\"A/B:C\"), \"ABC\")\n\n    def test_uses_fallback(self):\n        self.assertEqual(clean_filename(\"!!!\"), \"output\")\n\n\n6.3.3 19.3 Metadata\nimport configparser\nfrom pathlib import Path\n\nPLUGIN = Path(__file__).parents[1] / \"my_plugin\"\nparser = configparser.ConfigParser()\nparser.read(PLUGIN / \"metadata.txt\", encoding=\"utf-8\")\nassert parser[\"general\"][\"version\"] == (PLUGIN / \"VERSION\").read_text().strip()\n\n\n6.3.4 19.4 Testes do ZIP\nVerifique:\n\num único directório de topo;\nficheiros obrigatórios;\nsem __pycache__, .pyc, .git, __MACOSX;\nmetadata sincronizada;\ntodos os recursos referenciados existem;\ntamanho aceitável.",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html#empacotamento",
+    "href": "chapters/04-desenvolvimento-avancado.html#empacotamento",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "6.4 20. Empacotamento",
+    "text": "6.4 20. Empacotamento\nEstrutura correcta:\nmy_plugin-1.0.0.zip\n└── my_plugin/\n    ├── __init__.py\n    ├── metadata.txt\n    ├── plugin.py\n    ├── LICENSE\n    └── ...\nEstrutura incorrecta:\nmy_plugin-1.0.0.zip\n├── README.md\n└── src/\n    └── my_plugin/\nComando:\nzip -qr my_plugin-1.0.0.zip my_plugin \\\n  -x '*/__pycache__/*' '*.pyc' '.git/*'",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html#git-e-fluxo-de-colaboração",
+    "href": "chapters/04-desenvolvimento-avancado.html#git-e-fluxo-de-colaboração",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "6.5 21. Git e fluxo de colaboração",
+    "text": "6.5 21. Git e fluxo de colaboração\nFluxo recomendado:\nmain\n  └── feature/snapping\n          └── Pull Request -&gt; CI -&gt; review -&gt; merge\nCommits devem descrever uma unidade lógica:\nAdd cancellable background conversion\nFix Qt 6 dock widget enum compatibility\nValidate GDAL executable paths\nEvite commits como update, changes ou final final.\n\n6.5.1 21.1 Pull Request\nInclua:\n\no que mudou;\nmotivo;\nimpacto no utilizador;\nrisco e compatibilidade;\ntestes realizados;\ncapturas de ecrã, quando a interface mudou.",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html#integração-contínua-e-releases",
+    "href": "chapters/04-desenvolvimento-avancado.html#integração-contínua-e-releases",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "6.6 22. Integração contínua e releases",
+    "text": "6.6 22. Integração contínua e releases\n\n\n\nPipeline de release\n\n\nUm workflow mínimo:\nname: Plugin checks\n\non:\n  push:\n  pull_request:\n\njobs:\n  validate:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - run: python -m compileall -q my_plugin\n      - run: python -m unittest discover -s tests -v\n      - run: |\n          test -f my_plugin/metadata.txt\n          test -f my_plugin/__init__.py\n          test -f my_plugin/LICENSE\n      - run: zip -qr my_plugin.zip my_plugin -x '*/__pycache__/*' '*.pyc'\nUma release profissional:\n\nvalida que a tag coincide com VERSION e metadata.txt;\nexecuta testes;\ngera o ZIP a partir da tag;\npublica notas de versão;\nanexa o pacote;\nmantém o código da release idêntico ao repositório indicado na metadata.\n\nGeoClick Capture adoptou este processo na versão 1.2.6.",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html#publicação-no-repositório-oficial-do-qgis",
+    "href": "chapters/04-desenvolvimento-avancado.html#publicação-no-repositório-oficial-do-qgis",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "6.7 23. Publicação no repositório oficial do QGIS",
+    "text": "6.7 23. Publicação no repositório oficial do QGIS\nAntes do upload:\n\nobtenha OSGEO ID;\nconfirme links de homepage, repositório e tracker;\nuse licença compatível;\ninclua descrição curta em inglês;\ndocumente dependências;\nnão inclua executáveis ou bibliotecas compiladas;\nmantenha o ZIP dentro do limite;\nverifique duplicação funcional;\nteste Windows, Linux e macOS quando possível;\nmantenha changelog e versão actualizados.\n\n\n6.7.1 23.1 Aprovação\nNovos plugins passam por validação automatizada e revisão. O revisor pode instalar uma amostra aleatória e verificar se o QGIS inicia sem falhar. Um traceback em initGui() é motivo suficiente para bloqueio.\n\n\n6.7.2 23.2 Actualizações\nPara uma nova versão:\n\naumente a versão;\nactualize changelog;\nconfirme links;\nexecute todos os testes;\ngere o ZIP a partir do mesmo commit da release;\ncarregue como nova versão do mesmo plugin.\n\nNão altere o nome apenas por suportar uma versão nova de QGIS.",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/04-desenvolvimento-avancado.html#tradução-acessibilidade-e-documentação",
+    "href": "chapters/04-desenvolvimento-avancado.html#tradução-acessibilidade-e-documentação",
+    "title": "6  Parte IV - Desenvolvimento avançado",
+    "section": "6.8 24. Tradução, acessibilidade e documentação",
+    "text": "6.8 24. Tradução, acessibilidade e documentação\n\n6.8.1 24.1 Internacionalização\nUse inglês como idioma base quando pretende colaboração internacional. Prepare strings com self.tr() e ficheiros .ts/.qm para traduções.\nEvite concatenar frases que dificultam tradução:\n## Fraco\nmessage = \"Converted \" + str(count) + \" files\"\n\n## Melhor\nmessage = self.tr(\"Converted {count} files\").format(count=count)\n\n\n6.8.2 24.2 Acessibilidade\n\ntextos claros nos botões;\ntooltips;\nordem de tabulação lógica;\nnão depender apenas da cor;\nícones acompanhados de texto nos contextos principais;\nmensagens legíveis e copiáveis;\natalhos configuráveis quando apropriado.\n\n\n\n6.8.3 24.3 Documentação mínima\nREADME:\n\nproblema e solução;\nfuncionalidades;\ninstalação;\nuso;\ncompatibilidade;\nlimitações;\ndesenvolvimento;\ncomo reportar erros;\nlicença.\n\nInclua dados mínimos seguros quando ajudam a reproduzir o fluxo.",
+    "crumbs": [
+      "Parte IV — Desenvolvimento avançado",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Parte IV - Desenvolvimento avançado</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-estudos-de-caso.html",
+    "href": "chapters/05-estudos-de-caso.html",
+    "title": "7  Parte V - Estudos de caso",
+    "section": "",
+    "text": "7.1 25. GPX Batch Converter\nRepositório: https://github.com/Jubilio/gpx-batch-converter\nPlugin oficial: https://plugins.qgis.org/plugins/gpx_batch_converter/",
+    "crumbs": [
+      "Parte V — Estudos de caso",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Parte V - Estudos de caso</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-estudos-de-caso.html#gpx-batch-converter",
+    "href": "chapters/05-estudos-de-caso.html#gpx-batch-converter",
+    "title": "7  Parte V - Estudos de caso",
+    "section": "",
+    "text": "Fluxo do GPX Batch Converter\n\n\n\n7.1.1 25.1 Problema original\nConverter centenas de ficheiros GPX manualmente, camada por camada, cria atrasos, nomes inconsistentes e perda de rastreabilidade. A primeira versão automatizou a conversão de waypoints, routes, route_points, tracks e track_points.\n\n\n7.1.2 25.2 Arquitectura\ngpx_batch_converter/\n├── __init__.py          -&gt; classFactory()\n├── plugin.py            -&gt; menu, toolbar e ciclo de vida\n├── dialog.py            -&gt; interface, validação e apresentação\n├── conversion_task.py   -&gt; QgsTask, GDAL, cancelamento e resultados\n├── metadata.txt\n├── icon.png\n├── LICENSE\n└── README.md\nEsta separação permite testar funções de conversão sem instanciar toda a interface.\n\n\n7.1.3 25.3 Evolução funcional\n\n7.1.3.1 Fase 1 - lote básico\n\npastas de entrada e saída;\nsubcamadas seleccionáveis;\noverwrite;\nadicionar resultados ao projecto;\nprogresso e resumo.\n\n\n\n7.1.3.2 Fase 2 - fusão e proveniência\n\num output por tipo de camada;\nprefixo configurável;\ncampos source_file, source_path e source_layer;\ncamadas ausentes separadas de erros.\n\n\n\n7.1.3.3 Fase 3 - produto profissional\n\nShapefile, GeoPackage, GeoJSON, KML e CSV/WKT;\npainel de resultados;\nrelatório CSV;\nQGIS Task Manager;\ncancelamento;\ninterface responsiva.\n\n\n\n7.1.3.4 Fase 4 - segurança e publicação\n\ncaminhos absolutos de GDAL;\nshell=False;\nargumentos validados;\nremoção de SQL dinâmico;\nmetadata completa;\ncompatibilidade QGIS 3.28-4.99 e Qt 6;\naprovação no repositório oficial.\n\n\n\n\n7.1.4 25.4 Lições\n\nDiferencie ausência esperada de falha.\nUma operação demorada precisa de tarefa, progresso e cancelamento.\nDados fundidos precisam de proveniência.\nProcessos externos exigem validação de segurança.\nRelatórios estruturados são mais úteis que uma caixa final.",
+    "crumbs": [
+      "Parte V — Estudos de caso",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Parte V - Estudos de caso</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-estudos-de-caso.html#geoclick-capture",
+    "href": "chapters/05-estudos-de-caso.html#geoclick-capture",
+    "title": "7  Parte V - Estudos de caso",
+    "section": "7.2 26. GeoClick Capture",
+    "text": "7.2 26. GeoClick Capture\nRepositório: https://github.com/Jubilio/qgis-latlon\nRelease usada no estudo: v1.2.6.\n\n7.2.1 26.1 Problema e reposicionamento\nA primeira ideia concentrava-se em coordenadas, uma área já coberta por plugins maduros. O projecto foi redefinido como uma ferramenta de log auditável para verificação de campo, revisão cartográfica e controlo de qualidade GIS.\nEssa decisão ilustra um princípio importante: uma boa alteração de produto pode ser mais valiosa que adicionar funcionalidades.\n\n\n7.2.2 26.2 Registo de auditoria\nCada captura pode armazenar:\nsession_id\ncaptured_at\noperator\ncategory\nstatus\nnote\nlat / lon\nmap_x / map_y\nproject_crs\nproject_name\nmap_scale\nsource_layer\nsource_layer_id\nsource_feature_id\nlocation\nsnapped\nsnap_type\nsnap_distance\n\n\n7.2.3 26.3 Evolução\n\n7.2.3.1 Base\n\nclique no mapa;\nWGS 84;\ncamada temporária;\nexportação.\n\n\n\n7.2.3.2 Painel Capture Log\n\nsessão;\noperador, categoria, estado e nota;\nQgsMapLayerComboBox;\ntabela de registos;\nundo, delete e clear;\nCSV, GeoJSON e GeoPackage;\npreferências persistentes.\n\n\n\n7.2.3.3 Precisão espacial\n\nsnapping do projecto;\nfallback automático para vértices;\nfallback para segmentos;\ntolerância em pixels;\ncampos de auditoria.\n\n\n\n7.2.3.4 Rede\n\nQgsNetworkAccessManager;\ncache;\num pedido por segundo;\ntimeout;\nredireccionamentos seguros;\ndiagnóstico HTTP/SSL/DNS/proxy;\nfallback de endereço para área administrativa;\ncaptura independente da rede.\n\n\n\n7.2.3.5 Compatibilidade e qualidade\n\nenums Qt 6 scoped;\nfallbacks Qt 5;\ntestes AST;\nícones SVG específicos;\nGitHub Actions e release automatizada.\n\n\n\n\n7.2.4 26.4 Lições\n\nO CRS do mapa não é necessariamente WGS 84.\nInterface persistente favorece QDockWidget.\nSnapping deve ser previsível e auditável.\nServiço externo não deve comprometer a função principal.\nValidadores podem analisar ficheiros que não são executados directamente; mantenha todo o pacote compatível.",
+    "crumbs": [
+      "Parte V — Estudos de caso",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Parte V - Estudos de caso</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/05-estudos-de-caso.html#comparação-dos-dois-padrões",
+    "href": "chapters/05-estudos-de-caso.html#comparação-dos-dois-padrões",
+    "title": "7  Parte V - Estudos de caso",
+    "section": "7.3 27. Comparação dos dois padrões",
+    "text": "7.3 27. Comparação dos dois padrões\nOs dois plugins partilham o mesmo ciclo de vida QGIS, metadata, disciplina de empacotamento e preocupação com Qt 6. A diferença está no centro da arquitectura: o GPX Batch Converter organiza uma operação de lote; o GeoClick Capture mantém uma sessão interactiva no mapa. A tabela seguinte resume as decisões principais.\nInteracção principal\n\nGPX Batch Converter: ficheiros e operação de lote.\nGeoClick Capture: clique no mapa e sessão interactiva.\n\nInterface\n\nGPX Batch Converter: QDialog, adequado a uma tarefa com início e fim definidos.\nGeoClick Capture: QDockWidget, adequado a trabalho contínuo enquanto o mapa permanece visível.\n\nProcessamento e dependências\n\nGPX Batch Converter: usa QgsTask para operações longas e integra ferramentas GDAL/OGR disponibilizadas pelo ambiente QGIS.\nGeoClick Capture: executa sobretudo interacções curtas; a dependência externa principal é a geocodificação reversa opcional.\n\nGeometria e estado\n\nGPX Batch Converter: lê, converte e combina geometrias, mantendo opções e resultados do lote.\nGeoClick Capture: cria pontos, transforma CRS, aplica snapping e mantém sessão, camada e preferências.\n\nSaídas e risco central\n\nGPX Batch Converter: produz múltiplos formatos; os principais riscos são bloqueio da interface, subprocessos e tratamento incompleto de lotes.\nGeoClick Capture: produz uma camada auditável e exportações; os principais riscos são CRS, snapping, rede e compatibilidade Qt.\n\nA arquitectura ideal depende do tipo de problema. Não copie uma estrutura inteira sem compreender as necessidades.",
+    "crumbs": [
+      "Parte V — Estudos de caso",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Parte V - Estudos de caso</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-projecto-pratico.html",
+    "href": "chapters/06-projecto-pratico.html",
+    "title": "8  Parte VI - Projecto prático",
+    "section": "",
+    "text": "8.1 28. Construir o Quick Point Logger\nO repositório deste manual inclui examples/quick_point_logger, um plugin pedagógico que combina:",
+    "crumbs": [
+      "Parte VI — Projecto prático",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parte VI - Projecto prático</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-projecto-pratico.html#construir-o-quick-point-logger",
+    "href": "chapters/06-projecto-pratico.html#construir-o-quick-point-logger",
+    "title": "8  Parte VI - Projecto prático",
+    "section": "",
+    "text": "acção verificável;\nferramenta de clique;\ncamada de memória;\ntransformação para WGS 84;\npainel simples;\nexportação GeoJSON;\ndefinições persistentes;\ncompatibilidade básica Qt 5/6.\n\n\n8.1.1 28.1 Passo 1 - criar a pasta\nquick_point_logger/\n├── __init__.py\n├── metadata.txt\n├── plugin.py\n├── dock.py\n├── utils.py\n├── icons/capture.svg\n├── LICENSE\n└── README.md\n\n\n8.1.2 28.2 Passo 2 - metadata e entrada\nImplemente metadata.txt e classFactory() com a estrutura mostrada nos capítulos 4 e 5.\n\n\n8.1.3 28.3 Passo 3 - acção e ferramenta\nCrie uma acção verificável, associe ao menu Vector e à toolbar. Quando activada, defina QgsMapToolEmitPoint no canvas.\n\n\n8.1.4 28.4 Passo 4 - camada e campos\nCrie a camada WGS 84 e adicione campos de tempo, coordenadas e nota. Transforme o clique antes de escrever.\n\n\n8.1.5 28.5 Passo 5 - painel\nInclua:\n\nnota para próxima captura;\nnúmero de pontos;\niniciar/parar;\nundo;\nexportar.\n\n\n\n8.1.6 28.6 Passo 6 - testes\nTeste:\n\nmetadata;\nversão;\nestrutura;\nfunção DMS;\nnome de ficheiro;\nausência de imports directos PyQt5/PyQt6.\n\n\n\n8.1.7 28.7 Passo 7 - pacote\npython -m compileall -q quick_point_logger\npython -m unittest discover -s tests -v\nzip -qr quick_point_logger-0.1.0.zip quick_point_logger \\\n  -x '*/__pycache__/*' '*.pyc'",
+    "crumbs": [
+      "Parte VI — Projecto prático",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parte VI - Projecto prático</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-projecto-pratico.html#exercícios-graduais",
+    "href": "chapters/06-projecto-pratico.html#exercícios-graduais",
+    "title": "8  Parte VI - Projecto prático",
+    "section": "8.2 29. Exercícios graduais",
+    "text": "8.2 29. Exercícios graduais\n\n8.2.1 Básico\n\nAlterar nome, ícone e mensagem da acção.\nAdicionar um campo operator.\nGuardar a última nota com QgsSettings.\nValidar se a camada está activa.\n\n\n\n8.2.2 Intermédio\n\nPermitir seleccionar camada de destino com QgsMapLayerComboBox.\nAdicionar exportação GeoPackage.\nImplementar undo da última feição.\nAdicionar snapping do projecto.\nCriar tabela de registos.\n\n\n\n8.2.3 Avançado\n\nExecutar exportação pesada em QgsTask.\nAdicionar geocodificação reversa assíncrona com cache.\nCriar testes AST para enums Qt.\nAdicionar tradução português/inglês.\nCriar release automática por tag.\nPreparar submissão ao repositório oficial.",
+    "crumbs": [
+      "Parte VI — Projecto prático",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parte VI - Projecto prático</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-projecto-pratico.html#diagnóstico-de-erros",
+    "href": "chapters/06-projecto-pratico.html#diagnóstico-de-erros",
+    "title": "8  Parte VI - Projecto prático",
+    "section": "8.3 30. Diagnóstico de erros",
+    "text": "8.3 30. Diagnóstico de erros\nO diagnóstico deve começar pelo ciclo de vida: confirmar se o pacote foi descoberto, se classFactory() importou a classe, se initGui() terminou e se a operação específica recebeu entradas válidas. Depois consulte Log Messages, a consola Python e o traceback completo. Os padrões abaixo cobrem as falhas mais comuns.\n\nPlugin não aparece: metadata inválida ou pasta instalada no nível errado. Verifique metadata.txt, o nome da pasta e a localização no perfil.\nErro em classFactory(): import relativo, nome da classe ou dependência indisponível. Teste o import na consola Python do QGIS.\nErro em initGui(): enum Qt, recurso ausente, caminho de ícone ou widget incompatível. Valide todos os ficheiros do pacote no QGIS 3 e 4.\nInterface congela: processamento pesado executado no thread principal. Mova o lote para QgsTask e actualize widgets apenas no callback final.\nCoordenadas erradas: ponto do canvas tratado directamente como longitude/latitude. Transforme do CRS do projecto para EPSG:4326.\nOutput bloqueado: camada aberta no QGIS ou ficheiro utilizado por outra aplicação. Remova a camada, feche o programa e repita.\nSnapping não ocorre: configuração, tolerância, visibilidade ou transformação de CRS incorrecta. Teste o snapping do projecto e o fallback separadamente.\nRede falha apenas no QGIS: pedido feito com biblioteca que ignora o proxy da aplicação. Use QgsNetworkAccessManager.\nQGIS fecha ou produz erro ao desactivar: tarefa, reply ou map tool continuam activos. Cancele, aborte e remova tudo em unload().\nZIP rejeitado: directório de topo, metadata, licença, versão ou ficheiros de cache incorrectos. Execute a checklist de publicação.\nValidador Qt 6 falha: enum antigo ou import directo de PyQt5. Use enums scoped e qgis.PyQt.\nProcesso externo não cancela: subprocesso executado sem polling. Mantenha referência ao processo, use timeout e force a paragem apenas quando necessário.\nResultados inconsistentes: estados ausentes ou excepções agregadas numa mensagem genérica. Registe uma linha de resultado por ficheiro e subcamada.\nCamada não recebe campos: provider não suporta alteração ou camada está em estado incompatível. Verifique capacidades e actualize os campos.\nErro só em determinados projectos: CRS inválido, camada corrompida, geometria diferente ou definições persistentes antigas. Registe o contexto e teste com projecto vazio.",
+    "crumbs": [
+      "Parte VI — Projecto prático",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parte VI - Projecto prático</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-projecto-pratico.html#checklists",
+    "href": "chapters/06-projecto-pratico.html#checklists",
+    "title": "8  Parte VI - Projecto prático",
+    "section": "8.4 31. Checklists",
+    "text": "8.4 31. Checklists\n\n8.4.1 31.1 Antes de desenvolver\n\nproblema e utilizador definidos;\nplugins semelhantes analisados;\nescopo da primeira versão limitado;\nversões QGIS escolhidas;\ndados mínimos disponíveis;\nriscos de rede, ficheiros e segurança identificados.\n\n\n\n8.4.2 31.2 Antes de criar PR\n\ncódigo compila;\ntestes passam;\nplugin carrega e descarrega;\nfluxo principal testado;\nerros e cancelamento testados;\ndocumentação actualizada;\nsem ficheiros gerados ou cache;\nscreenshots incluídos se necessário.\n\n\n\n8.4.3 31.3 Antes de publicar\n\nVERSION, metadata e changelog sincronizados;\nhomepage, repository e tracker funcionam;\nlicença incluída no pacote;\ndescrição em inglês;\ndependências documentadas;\nQGIS 3/4 e plataformas testadas conforme compromisso;\nZIP com uma pasta de topo;\nsem binários, .git, __pycache__ e .pyc;\npacote idêntico ao commit da release;\ndados de teste não contêm informação sensível.",
+    "crumbs": [
+      "Parte VI — Projecto prático",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parte VI - Projecto prático</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/06-projecto-pratico.html#próximos-níveis",
+    "href": "chapters/06-projecto-pratico.html#próximos-níveis",
+    "title": "8  Parte VI - Projecto prático",
+    "section": "8.5 32. Próximos níveis",
+    "text": "8.5 32. Próximos níveis\nDepois de dominar estes padrões, explore:\n\nProcessing providers e algoritmos personalizados;\nQGIS Server plugins;\nformulários e widgets de edição;\nlayouts e relatórios;\nintegração com bases PostGIS;\nautenticação do QGIS;\nmodelos de dados e validação de topologia;\ntestes em containers QGIS;\nqgis-plugin-ci;\npublicação de documentação com MkDocs ou Sphinx.\n\nA evolução deve ser guiada por problemas reais, não por uma lista de funcionalidades. Os dois plugins estudados tornaram-se mais fortes quando cada versão respondeu a falhas observadas: lentidão, falta de auditoria, incompatibilidade Qt 6, snapping, diagnósticos de rede, validação de segurança e publicação reproduzível.",
+    "crumbs": [
+      "Parte VI — Projecto prático",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Parte VI - Projecto prático</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-apendices.html",
+    "href": "chapters/07-apendices.html",
+    "title": "Apêndice A — Apêndices e referências",
+    "section": "",
+    "text": "A.1 Apêndice A - Template de metadata",
+    "crumbs": [
+      "Apêndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Apêndices e referências</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-apendices.html#apêndice-a---template-de-metadata",
+    "href": "chapters/07-apendices.html#apêndice-a---template-de-metadata",
+    "title": "Apêndice A — Apêndices e referências",
+    "section": "",
+    "text": "[general]\nname=My QGIS Tool\ndescription=One-line English description.\nabout=Detailed explanation, dependencies and limitations.\nversion=0.1.0\nqgisMinimumVersion=3.28\nqgisMaximumVersion=4.99\nauthor=Author Name\nemail=author@example.org\nhomepage=https://github.com/user/repo#readme\nrepository=https://github.com/user/repo\ntracker=https://github.com/user/repo/issues\nlicense=MIT\ncategory=Vector\ntags=meaningful,searchable,tags\nexperimental=True\ndeprecated=False\nhasProcessingProvider=False\nsupportsQt6=True\nicon=icons/icon.svg\nchangelog=0.1.0 - Initial release.",
+    "crumbs": [
+      "Apêndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Apêndices e referências</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-apendices.html#apêndice-b---template-de-unload",
+    "href": "chapters/07-apendices.html#apêndice-b---template-de-unload",
+    "title": "Apêndice A — Apêndices e referências",
+    "section": "A.2 Apêndice B - Template de unload()",
+    "text": "A.2 Apêndice B - Template de unload()\ndef unload(self):\n    if self.tool is not None and self.canvas.mapTool() is self.tool:\n        self.canvas.unsetMapTool(self.tool)\n\n    if self.task is not None:\n        self.task.cancel()\n        self.task = None\n\n    for reply in list(self.pending_replies):\n        try:\n            reply.abort()\n            reply.deleteLater()\n        except RuntimeError:\n            pass\n    self.pending_replies.clear()\n\n    if self.action is not None:\n        self.iface.removePluginVectorMenu(self.MENU, self.action)\n        self.iface.removeToolBarIcon(self.action)\n        self.action.deleteLater()\n        self.action = None\n\n    if self.dock is not None:\n        self.iface.removeDockWidget(self.dock)\n        self.dock.deleteLater()\n        self.dock = None",
+    "crumbs": [
+      "Apêndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Apêndices e referências</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-apendices.html#apêndice-c---estrutura-de-resultado-de-lote",
+    "href": "chapters/07-apendices.html#apêndice-c---estrutura-de-resultado-de-lote",
+    "title": "Apêndice A — Apêndices e referências",
+    "section": "A.3 Apêndice C - Estrutura de resultado de lote",
+    "text": "A.3 Apêndice C - Estrutura de resultado de lote\nresult = {\n    \"source_file\": str(source_path),\n    \"layer\": layer_name,\n    \"status\": \"converted\",\n    \"feature_count\": count,\n    \"output\": str(output_path),\n    \"message\": \"\",\n}",
+    "crumbs": [
+      "Apêndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Apêndices e referências</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-apendices.html#apêndice-d---glossário",
+    "href": "chapters/07-apendices.html#apêndice-d---glossário",
+    "title": "Apêndice A — Apêndices e referências",
+    "section": "A.4 Apêndice D - Glossário",
+    "text": "A.4 Apêndice D - Glossário\nAPI - interface utilizada por código para interagir com uma aplicação ou serviço.\nCanvas - área de mapa do QGIS.\nCRS - sistema de referência de coordenadas.\nGDAL/OGR - bibliotecas e ferramentas para leitura, transformação e escrita de dados geoespaciais.\nGeoPackage - formato SQLite aberto para dados geográficos.\nMetadata - dados que descrevem o plugin, incluindo nome, versão e compatibilidade.\nProvider - componente QGIS que fornece acesso a uma fonte de dados.\nPyQGIS - API Python do QGIS.\nQt - framework de interface utilizado pelo QGIS.\nSignal/slot - mecanismo Qt para ligar eventos a funções.\nSnapping - ajustamento de uma coordenada a um vértice ou segmento próximo.\nThread principal - thread responsável pela interface gráfica.",
+    "crumbs": [
+      "Apêndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Apêndices e referências</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-apendices.html#referências-e-recursos",
+    "href": "chapters/07-apendices.html#referências-e-recursos",
+    "title": "Apêndice A — Apêndices e referências",
+    "section": "A.5 Referências e recursos",
+    "text": "A.5 Referências e recursos\n\nQGIS Documentation. Developing Python Plugins. https://docs.qgis.org/4.2/en/docs/pyqgis_developer_cookbook/plugins/index.html\nQGIS Documentation. Structuring Python Plugins. https://docs.qgis.org/4.2/en/docs/pyqgis_developer_cookbook/plugins/plugins.html\nQGIS Documentation. Releasing your plugin. https://docs.qgis.org/4.2/en/docs/pyqgis_developer_cookbook/plugins/releasing.html\nQGIS Plugins. Publishing guidelines. https://plugins.qgis.org/docs/publish\nQGIS API Documentation. https://api.qgis.org/\nGPX Batch Converter. https://github.com/Jubilio/gpx-batch-converter\nGeoClick Capture. https://github.com/Jubilio/qgis-latlon\nGPX Batch Converter no repositório oficial. https://plugins.qgis.org/plugins/gpx_batch_converter/",
+    "crumbs": [
+      "Apêndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Apêndices e referências</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/07-apendices.html#nota-de-licenciamento",
+    "href": "chapters/07-apendices.html#nota-de-licenciamento",
+    "title": "Apêndice A — Apêndices e referências",
+    "section": "A.6 Nota de licenciamento",
+    "text": "A.6 Nota de licenciamento\nO texto do manual é disponibilizado sob Creative Commons Attribution 4.0 International (CC BY 4.0). Os exemplos de código incluídos no repositório são disponibilizados sob MIT License. As APIs, nomes e marcas QGIS pertencem aos respectivos projectos e titulares.",
+    "crumbs": [
+      "Apêndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Apêndices e referências</span>"
+    ]
+  }
+]
