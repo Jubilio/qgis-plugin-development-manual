@@ -1,0 +1,20 @@
+[general]
+name=Quick Point Logger Example
+description=Captures map clicks into an auditable temporary point layer.
+about=Educational plugin showing QAction, QgsMapToolEmitPoint, coordinate transformation, a dock widget, settings, undo and GeoJSON export.
+version=0.1.0
+qgisMinimumVersion=3.28
+qgisMaximumVersion=4.99
+author=Jubílio Filiano Mausse
+email=jubiliomausse5@gmail.com
+homepage=https://github.com/Jubilio/qgis-plugin-development-manual#readme
+repository=https://github.com/Jubilio/qgis-plugin-development-manual
+tracker=https://github.com/Jubilio/qgis-plugin-development-manual/issues
+license=MIT
+category=Vector
+tags=education,point,capture,coordinates
+experimental=True
+deprecated=False
+hasProcessingProvider=False
+supportsQt6=True
+icon=icons/capture.svg

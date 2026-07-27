@@ -1,0 +1,25 @@
+name: Validate examples
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile Python sources
+        run: python -m compileall -q examples snippets
+      - name: Validate required files
+        run: |
+          test -f manual/manual.md
+          test -f examples/minimal_plugin/metadata.txt
+          test -f examples/quick_point_logger/metadata.txt
+          if find . -type d -name __pycache__ | grep -q .; then
+            echo "Python cache directories found"
+            exit 1
+          fi
